@@ -27,19 +27,19 @@ RUN mkdir -p /data && chmod 755 /install/entrypoint.sh
 
 ## This works only AFTER the initial configuration took place.
 
-RUN slapadd -n 0 -l  /install/schema/cosine.ldif -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d/ &&\
-    slapadd -n 0 -l  /install/schema/corba.ldif && \
-    slapadd -n 0 -l  /install/schema/nis.ldif && \
-    slapadd -n 0 -l  /install/schema/inetorgperson.ldif && \
-    slapadd -n 0 -l  /install/schema/ppolicy.ldif && \
-    slapadd -n 0 -l  /install/schema/qmail.ldif && \
-# EduID Schema
-    slapadd -n 0 -l  /install/schema/eduperson-201602.openldap.ldif && \
-    slapadd -n 0 -l  /install/schema/swissedu-201706.openldap.ldif && \
-# OAuth2 Schema
-    slapadd -n 0 -l /install/schema/oidc-client-schema-openldap.ldif && \
-    slapadd -n 0 -l  /install/schema/oidc-session-schema-openldap.ldif && \
-    slapadd -n 0 -l  /install/schema/oidc-authz-schema-openldap.ldif
+# RUN slapadd -n 0 -l  /install/schema/cosine.ldif -f /etc/openldap/slapd.conf -F /etc/openldap/slapd.d/ &&\
+#     slapadd -n 0 -l  /install/schema/corba.ldif && \
+#     slapadd -n 0 -l  /install/schema/nis.ldif && \
+#     slapadd -n 0 -l  /install/schema/inetorgperson.ldif && \
+#     slapadd -n 0 -l  /install/schema/ppolicy.ldif && \
+#     slapadd -n 0 -l  /install/schema/qmail.ldif && \
+#     # EduID Schema
+#     slapadd -n 0 -l  /install/schema/eduperson-201602.openldap.ldif && \
+#     slapadd -n 0 -l  /install/schema/swissedu-201706.openldap.ldif && \
+#     # OAuth2 Schema
+#     slapadd -n 0 -l /install/schema/oidc-client-schema-openldap.ldif && \
+#     slapadd -n 0 -l  /install/schema/oidc-session-schema-openldap.ldif && \
+#     slapadd -n 0 -l  /install/schema/oidc-authz-schema-openldap.ldif
 
 RUN rm -rf /data/*
 EXPOSE 389 636
