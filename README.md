@@ -15,7 +15,7 @@ Docker Container for running tweaked openldap service
 - oidc-session ([OIDC Consortium](https://bitbucket.org/connect2id/server-ldap-schemas))
 - oidc-authz ([OIDC Consortium](https://bitbucket.org/connect2id/server-ldap-schemas))
 
-- eduperson ([REFEDS](https://wiki.refeds.org/display/STAN/eduPerson)])
+- eduperson ([REFEDS](https://wiki.refeds.org/display/STAN/eduPerson))
 - swissedu ([Switch EduID](https://help.switch.ch/aai/support/documents/attributes/))
 
 ## Initial Configuration
