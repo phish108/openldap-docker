@@ -440,7 +440,7 @@ olcObjectClasses: ( 1.3.6.1.4.1.40805.2.2.9 NAME 'oidcIdAccessToken'
         STRUCTURAL
         MAY ( oidcClaimName $
               oidcClaimsLocales $
-              oidcClaimsData
+              oidcClaimsData $
               oidcPresetUserInfoClaims )
         X-ORIGIN 'OAuth 2.0' )
 olcObjectClasses: ( 1.3.6.1.4.1.40805.2.2.10 NAME 'oidcIdAccessTokenAux'
@@ -449,6 +449,6 @@ olcObjectClasses: ( 1.3.6.1.4.1.40805.2.2.10 NAME 'oidcIdAccessTokenAux'
         AUXILIARY
         MAY ( oidcClaimName $
               oidcClaimsLocales $
-              oidcClaimsData
+              oidcClaimsData $
               oidcPresetUserInfoClaims )
         X-ORIGIN 'OAuth 2.0' )
