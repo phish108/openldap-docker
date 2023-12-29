@@ -1,0 +1,220 @@
+# 202208 SWITCH
+#
+# SwissEduPerson directory schema (202208)
+# The latest version of this document is available at
+#
+#   https://www.switch.ch/aai/docs/LDAP-schemas/
+#
+# This schema implements the swissEdu attributes from the
+# SWITCHaai Attribute Specification Version 1.7, which can be found at
+#   https://www.switch.ch/aai/attributes/
+#
+# The schema implements the object class 'swissEduPerson', which
+# supports all of the eduPerson and swissEdu attributes specified
+# in the SWITCHaai Attribute Specification.
+#
+# Depends upon the following schemas:
+#   core, cosine, eduperson, inetorgperson
+#
+# Consult the document 'SWITCHaai Attribute Specification'
+# that explains the use of these attributes with examples.
+#        https://www.switch.ch/aai/attributes/
+#
+# Additional attributes are inherited and derived
+# from standard object classes as follows:
+#
+# Object Class person:
+#       sn (surname), cn (commonName), telephoneNumber
+#
+# Object Class organizationalPerson:
+#       facsimileTelephoneNumber, ou, postalAddress
+#
+# Object Class inetOrgPerson:
+#       givenName, displayName, employeeNumber, homePhone, homePostalAddress
+#       mail, mobile (mobileTelephoneNumber), preferredLanguage, uid
+#
+# Object Class eduPerson:
+#       eduPersonAffiliation, eduPersonAssurance, eduPersonEntitlement
+#       eduPersonNickname, eduPersonOrcid, eduPersonOrgDN, eduPersonOrgUnitDN
+#       eduPersonPrimaryAffiliation, eduPersonPrimaryOrgUnitDN
+#       eduPersonPrincipalName, eduPersonScopedAffiliation
+#       eduPersonTargetedID, eduPersonUniqueId
+#----------------------------------------------------------------------------
+dn: cn=swissedu,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: swissedu
+olcObjectIdentifier: SwissEduroot 2.16.756.1.2.5
+olcObjectIdentifier: SwissEdu SwissEduroot:1
+olcObjectIdentifier: SwissEduAttributeType SwissEdu:1
+olcObjectIdentifier: SwissEduObjectClass SwissEdu:2
+olcAttributeTypes: ( SwissEduAttributeType:1 
+ NAME 'swissEduPersonUniqueID' 
+ DESC 'Unique identifier for inter-institutional user identification' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:2 
+ NAME 'swissEduPersonDateOfBirth' 
+ DESC 'Date of birth (format YYYYMMDD, only numeric chars)' 
+ EQUALITY numericStringMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.36{8} 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:3 
+ NAME 'swissEduPersonGender' 
+ DESC 'Representation of human sex (see ISO 5218)' 
+ EQUALITY integerMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{1} 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:4 
+ NAME 'swissEduPersonHomeOrganization' 
+ DESC 'Domain name of the home organization' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:5 
+ NAME 'swissEduPersonHomeOrganizationType' 
+ DESC 'Type of the home organization' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:6 
+ NAME 'swissEduPersonStudyBranch1' 
+ DESC 'Study branch of a student, first level of classification' 
+ EQUALITY integerMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{6} )
+olcAttributeTypes: ( SwissEduAttributeType:7 
+ NAME 'swissEduPersonStudyBranch2' 
+ DESC 'Study branch of a student, intermediate level of classification' 
+ EQUALITY integerMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{6} )
+olcAttributeTypes: ( SwissEduAttributeType:8 
+ NAME 'swissEduPersonStudyBranch3' 
+ DESC 'Study branch of a student' 
+ EQUALITY integerMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{6} )
+olcAttributeTypes: ( SwissEduAttributeType:9 
+ NAME 'swissEduPersonStudyLevel' 
+ DESC 'Study level of a student in a particular studyBranch3' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: ( SwissEduAttributeType:10 
+ NAME 'swissEduPersonStaffCategory' 
+ DESC 'Workbranch of a staff member' 
+ EQUALITY integerMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.27{3} )
+olcAttributeTypes: ( SwissEduAttributeType:11 
+ NAME 'swissEduPersonMatriculationNumber' 
+ DESC 'Matriculation number of a student' 
+ EQUALITY numericStringMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.36{8} 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:12 
+ NAME 'swissEduPersonCardUID' 
+ DESC 'Card unique identifier' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: ( SwissEduAttributeType:13 
+ NAME 'swissEduID' 
+ DESC 'The Swiss edu-ID persistent identifier for Swiss Higher Education users' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:18 
+ NAME 'swissEduPersonPrivateMail'
+ DESC 'Private e-mail addresses of a person' 
+ EQUALITY caseIgnoreIA5Match 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+olcAttributeTypes: ( SwissEduAttributeType:19 
+ NAME 'swissEduPersonMinimumAgeCategory' 
+ DESC 'The minimum age category of the person' 
+ EQUALITY numericStringMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.36{2} 
+ SINGLE-VALUE )
+olcAttributeTypes: ( SwissEduAttributeType:20 
+ NAME 'swissEduPersonOrganizationalMail' 
+ DESC 'Organizational e-mail addresses of a person' 
+ EQUALITY caseIgnoreIA5Match 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.26{256} )
+olcAttributeTypes: ( SwissEduAttributeType:1023 
+ NAME 'swissLibraryPersonAffiliation' 
+ DESC 'Type of library affiliation' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: ( SwissEduAttributeType:1025 
+ NAME 'swissLibraryPersonResidence' 
+ DESC 'Defines the current residence of the patron' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+olcAttributeTypes: ( SwissEduAttributeType:1033 
+ NAME 'swissLibraryPersonResidenceCanton' 
+ DESC 'The current canton of residence of the patron' 
+ EQUALITY caseIgnoreMatch 
+ SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+ SINGLE-VALUE )
+olcObjectClasses: ( SwissEduObjectClass:1 
+ NAME 'swissEduPerson' 
+ DESC 'Swiss eduPerson Object for use in e-Academia' 
+ SUP inetOrgPerson 
+ STRUCTURAL 
+ MAY ( swissEduPersonUniqueID $ swissEduPersonDateOfBirth $ 
+ swissEduPersonGender $ swissEduPersonHomeOrganization $ 
+ swissEduPersonHomeOrganizationType $ swissEduPersonStudyBranch1 $ 
+ swissEduPersonStudyBranch2 $ swissEduPersonStudyBranch3 $ 
+ swissEduPersonStudyLevel $ swissEduPersonStaffCategory $ 
+ swissEduPersonMatriculationNumber $ swissEduPersonCardUID $ 
+ swissEduID $ swissEduPersonPrivateMail $ swissEduPersonMinimumAgeCategory $ 
+ swissEduPersonOrganizationalMail $ swissLibraryPersonAffiliation $ 
+ swissLibraryPersonResidence $ swissLibraryPersonResidenceCanton $ 
+ eduPersonAffiliation $ eduPersonNickname $ eduPersonOrgDN $ 
+ eduPersonOrgUnitDN $ eduPersonPrimaryAffiliation $ 
+ eduPersonPrincipalName $ eduPersonEntitlement $ 
+ eduPersonPrimaryOrgUnitDN $ eduPersonScopedAffiliation $ 
+ eduPersonTargetedID $ eduPersonAssurance $ eduPersonUniqueId $ eduPersonOrcid ) )
+#----------------------------------------------------------------------------
+# Changelog:
+#
+# 202208
+#       Updated to match the attribute specification 1.7
+#       New attributes: swissEduPersonPrivateMail, swissEduPersonMinimumAgeCategory,
+#       swissEduPersonOrganizationalMail, swissLibraryPersonResidenceCanton
+#
+# 201706
+#       Syntax now conformant with RFC 4512:
+#       - SYNTAX OID's without single quotes
+#       - SINGLE-VALUE after SYNTAX
+#
+# 201704
+#       Updated to match the attribute specification 1.6
+#       New attribute: eduPersonOrcid
+#
+# 201602
+#       Updated to match the attribute specification 1.5.1
+#       New attributes: swissEduID, swissLibraryPersonAffiliation, swissLibraryPersonResidence
+#       New eduPerson attribute adopted: eduPersonUniqueId
+#
+# 1.5   01. May 2010
+#       Added swissEduPersonCardUID and attributes from eduPerson specifi-
+#       cation
+#
+# 1.4   25. September 2007
+#       Changed matriculation number from integerMatch to numericStringMatch
+#
+# 1.3   05. September 2007
+#       Added swissEduPersonMatriculationNumber because it is a new
+#       attribute in the new SWITCHaai Attribute Specification 1.2
+#
+# 1.2   09. May 2003
+#       eduPersonEntitlement was missing in the schema, even it was
+#       part of the specification document
+#
+# 1.1   18. December 2002
+#       Allowed length of the attributes
+#               swissEduPersonStudyBranch1
+#               swissEduPersonStudyBranch2
+#               swissEduPersonStudyBranch3
+#       extended to six digits to allow for the values of the universities
+#       of applied sciences.
+#
+# 1.0   21. November 2002
+#       Initial version published
+#----------------------------------------------------------------------------
