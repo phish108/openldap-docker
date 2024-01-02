@@ -94,7 +94,6 @@ olcDbIndex: mail eq,sub
 olcDbIndex: uid eq,sub
 olcDbIndex: cn eq,sub
 olcDbIndex: sn eq,sub
-olcAccess: {0}access to dn.base="" by * read
-olcAccess: {1}to attrs=userPassword by self write by anonymous auth by * none
-olcAccess: {2}to * by self write by users read by * none
+olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
+olcAccess: {1}to * by self write by users read by * none
 # add backend config here
